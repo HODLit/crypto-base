@@ -22,6 +22,8 @@ USER crypto
 RUN cd /home/crypto && \
 echo '#!/bin/bash' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
+echo 'echo "user params: $@"' >> entrypoint.sh && \
+echo '' >> entrypoint.sh && \
 echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
 	echo 'sleep inf' >> entrypoint.sh && \
 echo 'fi' >> entrypoint.sh && \
