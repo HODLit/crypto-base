@@ -21,8 +21,7 @@ USER crypto
 WORKDIR cd /home/crypto
 ENTRYPOINT ["/home/crypto/entrypoint.sh"]
 
-RUN cd /home/crypto && \
-echo '#!/bin/sh' > entrypoint.sh && \
+RUN echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
