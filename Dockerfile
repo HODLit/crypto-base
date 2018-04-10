@@ -20,7 +20,7 @@ adduser -u 1000 -S crypto -G crypto
 USER crypto
 
 RUN cd /home/crypto && \
-echo '#!/bin/bash' > entrypoint.sh && \
+echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
