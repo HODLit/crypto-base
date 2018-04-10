@@ -18,6 +18,8 @@ addgroup -g 1000 -S crypto && \
 adduser -u 1000 -S crypto -G crypto
 
 USER crypto
+WORKDIR cd /home/crypto
+ENTRYPOINT ["/home/crypto/entrypoint.sh"]
 
 RUN cd /home/crypto && \
 echo '#!/bin/sh' > entrypoint.sh && \
@@ -30,5 +32,3 @@ echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'exec "$@"' >> entrypoint.sh && \
 chmod a+x entrypoint.sh
-
-ENTRYPOINT ["/home/crypto/entrypoint.sh"]
