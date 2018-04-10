@@ -15,14 +15,14 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN set -x && \
 addgroup -g 1000 -S crypto && \
-adduser -u 1000 -S crypto -G crypto
+adduser -u 1000 -S crypto -G crypto && \
+apk add --update --no-cache tini su-exec
 
 USER crypto
-WORKDIR cd /home/crypto
-ENTRYPOINT ["/home/crypto/entrypoint.sh"]
+WORKDIR /home/crypto
+ENTRYPOINT ["/sbin/tini", "--", "/home/crypto/entrypoint.sh"]
 
-RUN cd /home/crypto && \
-echo '#!/bin/sh' > entrypoint.sh && \
+RUN echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
@@ -30,5 +30,5 @@ echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
 	echo 'while sleep 3600; do :; done' >> entrypoint.sh && \
 echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
-echo 'exec "$@"' >> entrypoint.sh && \
+echo 'exec su-exec "$@"' >> entrypoint.sh && \
 chmod a+x entrypoint.sh
