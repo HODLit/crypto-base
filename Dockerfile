@@ -20,8 +20,8 @@ apk add --no-cache tini su-exec && \
 cd /home/crypto && \
 echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
-echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo 'echo "user params count: $#"' >> entrypoint.sh && \
+echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
 	echo 'echo "Sleeping.  Pid=$$"' >> entrypoint.sh && \
