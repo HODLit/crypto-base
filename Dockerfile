@@ -36,6 +36,6 @@ echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
 	echo 'done' >> entrypoint.sh && \
 echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
-echo 'exec su-exec "$@"' >> entrypoint.sh && \
+echo 'su-exec "$@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 chmod a+x entrypoint.sh
