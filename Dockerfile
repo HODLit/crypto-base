@@ -16,7 +16,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN set -x && \
 addgroup -g 1000 -S crypto && \
 adduser -u 1000 -S crypto -G crypto && \
-apk add --update --no-cache tini su-exec && \
+apk add --no-cache tini su-exec && \
 cd /home/crypto && \
 echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
