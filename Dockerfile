@@ -28,7 +28,7 @@ echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo 'echo "user params count: $#"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
-	echo 'echo \"Sleeping.  Pid=$$\"' >> entrypoint.sh && \
+	echo 'echo "Sleeping.  Pid=$$"' >> entrypoint.sh && \
 	echo 'while true; do' >> entrypoint.sh && \
 		echo 'sleep 10 &' >> entrypoint.sh && \
 		echo 'wait $!' >> entrypoint.sh && \
