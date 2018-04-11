@@ -27,8 +27,14 @@ echo '' >> entrypoint.sh && \
 echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'if [[ $# -lt 1 ]] || [[ "$1" == "-"* ]]; then' >> entrypoint.sh && \
-	echo 'while sleep 3600; do :; done' >> entrypoint.sh && \
+	echo 'echo \"Sleeping.  Pid=$$\"' >> entrypoint.sh && \
+	echo 'while true; do' >> entrypoint.sh && \
+		echo 'sleep 10 &' >> entrypoint.sh && \
+		echo 'wait $!' >> entrypoint.sh && \
+		echo 'echo "Zzz..."' >> entrypoint.sh && \
+	echo 'done' >> entrypoint.sh && \
 echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'exec su-exec "$@"' >> entrypoint.sh && \
+echo '' >> entrypoint.sh && \
 chmod a+x entrypoint.sh
