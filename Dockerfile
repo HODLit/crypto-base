@@ -37,6 +37,5 @@ echo 'su-exec crypto "$@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 chmod a+x entrypoint.sh
 
-USER crypto
 WORKDIR /home/crypto
 ENTRYPOINT ["/sbin/tini", "--", "/home/crypto/entrypoint.sh"]
