@@ -16,13 +16,9 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 RUN set -x && \
 addgroup -g 1000 -S crypto && \
 adduser -u 1000 -S crypto -G crypto && \
-apk add --update --no-cache tini su-exec
-
-USER crypto
-WORKDIR /home/crypto
-ENTRYPOINT ["/sbin/tini", "--", "/home/crypto/entrypoint.sh"]
-
-RUN echo '#!/bin/sh' > entrypoint.sh && \
+apk add --update --no-cache tini su-exec && \
+cd /home/crypto && \
+echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'echo "user params: $@"' >> entrypoint.sh && \
 echo 'echo "user params count: $#"' >> entrypoint.sh && \
@@ -38,4 +34,9 @@ echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'su-exec "$@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
-chmod a+x entrypoint.sh
+chmod a+x entrypoint.sh && \
+chown -R crypto:crypto /home/crypto
+
+USER crypto
+WORKDIR /home/crypto
+ENTRYPOINT ["/sbin/tini", "--", "/home/crypto/entrypoint.sh"]
