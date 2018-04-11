@@ -17,6 +17,7 @@ RUN set -x && \
 addgroup -g 1000 -S crypto && \
 adduser -u 1000 -S crypto -G crypto && \
 apk add --no-cache tini su-exec && \
+chown -R crypto:crypto /home/crypto && \
 cd /home/crypto && \
 echo '#!/bin/sh' > entrypoint.sh && \
 echo '' >> entrypoint.sh && \
@@ -34,8 +35,7 @@ echo 'fi' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
 echo 'su-exec "$@"' >> entrypoint.sh && \
 echo '' >> entrypoint.sh && \
-chmod a+x entrypoint.sh && \
-chown -R crypto:crypto /home/crypto
+chmod a+x entrypoint.sh
 
 USER crypto
 WORKDIR /home/crypto
